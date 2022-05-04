@@ -66,7 +66,7 @@ export default function (props) {
             </div>
             <div className="container my-3" style={{color: props.mode ==='dark'?'white':'black'}}>
                 <h2>Your text summary</h2>
-                <p>{text.split(" ").length} words and {text.length} characters</p>
+                <p>{text.trim() === "" ? 0 : text.trim().split(" ").length} words and {text.length} characters</p>
                 <p>{0.008 * text.split(" ").length} minutes read</p>
                 <h3>Preview</h3>
                 <p>{text.length > 0 ? text : 'Enter something in textbox above to preview here'}</p>
