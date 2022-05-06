@@ -2,13 +2,11 @@ import React, {useState} from "react";
 
 export default function (props) {
     const handleUpClick = () => {
-        //console.log("handle click called "+ text);
         let newText = text.toUpperCase();
         setText(newText);
         props.showAlert("Converted to uppercase!", "success");
     };
     const handleLowClick = () => {
-        //console.log("handle click called "+ text);
         let newText = text.toLowerCase();
         setText(newText);
         props.showAlert("Converted to lowercase!", "success");
@@ -27,13 +25,10 @@ export default function (props) {
         props.showAlert("Text reversed", "success");
     };
     const handleOnChange = (event) => {
-        //console.log("on change called");
         setText(event.target.value);
     };
     const handleCopy = () => {
-        var text = document.getElementById("myBox");
-        text.select();
-        navigator.clipboard.writeText(text.value);
+        navigator.clipboard.writeText(text);
         props.showAlert("Text copied to clipboard", "success");
     };
     
@@ -44,7 +39,6 @@ export default function (props) {
     };
 
     const [text, setText] = useState('');
-    //setText(text.toUpperCase);
     return (
         <>
             <div className="container" style={{color: props.mode ==='dark'?'white':'black'}}>
@@ -57,17 +51,17 @@ export default function (props) {
                         }}>
                     </textarea>
                 </div>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to UPPERCASE</button>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleLowClick}>Convert to lowercase</button>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleClearText}>Clear text</button>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleReverseText}>Reverse text</button>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Copy to clipboard</button>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Space</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to UPPERCASE</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleLowClick}>Convert to lowercase</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClearText}>Clear text</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleReverseText}>Reverse text</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Copy to clipboard</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Space</button>
             </div>
             <div className="container my-3" style={{color: props.mode ==='dark'?'white':'black'}}>
                 <h2>Your text summary</h2>
-                <p>{text.split(" ").filter((element) => {return element.length!==0}).length} words and {text.length} characters</p>
-                <p>{0.008 * text.split(" ").filter((element) => {return element.length!==0}).length} minutes read</p>
+                <p>{text.split(/\s+/).filter((element) => {return element.length!==0}).length} words and {text.length} characters</p>
+                <p>{0.008 * text.split(/\s+/).filter((element) => {return element.length!==0}).length} minutes read</p>
                 <h3>Preview</h3>
                 <p>{text.length > 0 ? text : 'Nothing to preview'}</p>
             </div>
