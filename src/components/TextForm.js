@@ -34,6 +34,7 @@ export default function (props) {
         var text = document.getElementById("myBox");
         text.select();
         navigator.clipboard.writeText(text.value);
+        document.getSelection().removeAllRanges();
         props.showAlert("Text copied to clipboard", "success");
     };
     
@@ -44,7 +45,6 @@ export default function (props) {
     };
 
     const [text, setText] = useState('');
-    //setText(text.toUpperCase);
     return (
         <>
             <div className="container" style={{color: props.mode ==='dark'?'white':'black'}}>
@@ -57,12 +57,12 @@ export default function (props) {
                         }}>
                     </textarea>
                 </div>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to UPPERCASE</button>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleLowClick}>Convert to lowercase</button>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleClearText}>Clear text</button>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleReverseText}>Reverse text</button>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Copy to clipboard</button>
-                <button disabled={text.length==0} className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Space</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to UPPERCASE</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleLowClick}>Convert to lowercase</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClearText}>Clear text</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleReverseText}>Reverse text</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Copy to clipboard</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Space</button>
             </div>
             <div className="container my-3" style={{color: props.mode ==='dark'?'white':'black'}}>
                 <h2>Your text summary</h2>
